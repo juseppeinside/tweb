@@ -8643,7 +8643,7 @@ export class AppMessagesManager extends AppManager {
     //         'user_id': 983000232
     //       },
     //       'start_param': 'GreatMinds',
-    //       'message': 'This is a long sponsored message. In fact, it has the maximum length allowed on the platform – 160 characters 😬😬. It\'s promoting a bot with a start parameter.' + chatId
+    //       'message': 'This is a long sponsored message. In fact, it has the maximum length allowed on the platform – 160 characters 😬😬. It\'s promoting a bot with a start parameter.' + chatId
     //     }
     //   ],
     //   'chats': [],
@@ -8726,14 +8726,25 @@ export class AppMessagesManager extends AppManager {
     });
   }
 
-  public async getHistoryMessagesCount(peerId: PeerId): Promise<number> {
+  public async getHistoryMessagesCount(peerId: PeerId, onlyOutgoing = false): Promise<number> {
     const storage = this.getHistoryMessagesStorage(peerId);
     if(!storage) {
       return 0;
     }
 
     const history = getObjectKeysAndSort(storage, 'desc');
-    return history.length;
+    if(!onlyOutgoing) {
+      return history.length;
+    }
+
+    let count = 0;
+    for(const mid of history) {
+      const message = storage.get(mid);
+      if(message?.pFlags?.out) {
+        count++;
+      }
+    }
+    return count;
   }
 }
 

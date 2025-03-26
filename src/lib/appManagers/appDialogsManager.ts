@@ -3381,7 +3381,6 @@ export class AppDialogsManager {
   }) {
     const {dom} = dialogElement;
     if(!dom) {
-      // this.log.error('setUnreadMessages no dom!', dialog);
       return;
     }
 
@@ -3396,7 +3395,7 @@ export class AppDialogsManager {
       !isSaved ? this.getLastMessageForDialog(dialog) : undefined,
       isTopic || isSaved ? !!dialog.pFlags.pinned : this.managers.dialogsStorage.isDialogPinned(peerId, this.filterId),
       this.managers.appMessagesManager.isDialogUnread(dialog),
-      this.managers.appMessagesManager.getHistoryMessagesCount(peerId), 
+      this.managers.appMessagesManager.getHistoryMessagesCount(peerId, true),  
       peerId.isAnyChat() && !isTopic ? this.managers.acknowledged.dialogsStorage.getForumUnreadCount(peerId, true).then((result) => {
         if(result.cached) {
           return result.result;

@@ -40,4 +40,5 @@ export class DialogElement {
       duration: isBatch ? 0 : BADGE_TRANSITION_TIME
     });
   }
+}
  
