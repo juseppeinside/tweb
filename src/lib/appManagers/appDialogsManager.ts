@@ -3505,7 +3505,7 @@ export class AppDialogsManager {
     if(hasMessagesCountBadge) {
       dialogElement.createMessagesCountBadge();
       dom.messagesCountBadge.classList.add('badge', 'badge-outgoing'); // добавляем новые классы
-      dom.messagesCountBadge.innerText = formatNumber(messagesCount, 1);
+      dom.messagesCountBadge.innerText = messagesCount === -1 ? 'Подсчет сообщений' : formatNumber(messagesCount, 1);
     }
 
     const badgesLength = [hasPinnedBadge, hasUnreadBadge, hasMentionsBadge, hasReactionsBadge, hasMessagesCountBadge].filter(Boolean).length;
