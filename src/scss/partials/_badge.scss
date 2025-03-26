@@ -53,4 +53,12 @@
   &-gray {
     background-color: var(--secondary-color);
   }
+
+  &-outgoing {
+    background-color: #FFA500;
+    border-radius: 50%;
+    white-space: nowrap;
+    font-size: 12px;
+    padding: 0 8px;
+  }
 }
