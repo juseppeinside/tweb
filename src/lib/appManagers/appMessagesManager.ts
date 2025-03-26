@@ -846,6 +846,14 @@ export class AppMessagesManager extends AppManager {
             pts_count
           });
 
+          const historyStorage = this.getHistoryStorage(peerId);
+          if(historyStorage.count !== null) {
+            ++historyStorage.count;
+          }
+          if(!historyStorage.maxId || newMessage.mid > historyStorage.maxId) {
+            historyStorage.maxId = newMessage.mid;
+          }
+
           updates = undefined;
         } else if((updates as Updates.updates).updates) {
           (updates as Updates.updates).updates.forEach((update) => {
